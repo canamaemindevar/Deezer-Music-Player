@@ -1,5 +1,5 @@
 //
-//  GenreView.swift
+//  GenreArtists.swift
 //  Deezer Music Player
 //
 //  Created by Emincan Antalyalı on 9.05.2023.
@@ -7,14 +7,15 @@
 
 import UIKit
 
-protocol GenreViewInterface: AnyObject {
+protocol GenreArtistsInterface {
     func prepare()
 }
 
-class GenreView: UIViewController {
-   
+class GenreArtistsView: UIViewController {
+
     
-    private lazy var viewModel = GenreViewModel()
+    
+    lazy var viewModel = GenreArtistsViewModel()
     
     let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,65 +29,54 @@ class GenreView: UIViewController {
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.layer.cornerRadius = 5
         collection.backgroundColor = .clear
-        collection.register(GenreCollectionViewCell.self, forCellWithReuseIdentifier: GenreCollectionViewCell.identifier)
+        collection.register(GenreArtistsCell.self, forCellWithReuseIdentifier: GenreArtistsCell.identifier)
         return collection
     }()
+    
     
     override func viewDidLoad() {
         viewModel.view = self
         viewModel.viewDidLoad()
         super.viewDidLoad()
-
     }
-
 
 }
 
-extension GenreView: GenreViewInterface {
+
+extension GenreArtistsView: GenreArtistsInterface {
     func prepare() {
         view.addSubview(mainCollectionView)
         view.backgroundColor = .systemBackground
-        mainCollectionView.dataSource = self
-        mainCollectionView.delegate = self
         NSLayoutConstraint.activate([
             view.trailingAnchor.constraint(equalToSystemSpacingAfter: mainCollectionView.trailingAnchor, multiplier: 3),
             mainCollectionView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 3),
             mainCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             mainCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-
-       
+    
+        mainCollectionView.dataSource = self
+        mainCollectionView.delegate = self
     }
     
     
 }
 
-extension GenreView: UICollectionViewDelegate, UICollectionViewDataSource {
+extension GenreArtistsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModel.arr?.data.count ?? 2
+        return viewModel.data?.data?.count ?? 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.identifier, for: indexPath) as? GenreCollectionViewCell else {
+        
+        guard let cell = mainCollectionView.dequeueReusableCell(withReuseIdentifier: GenreArtistsCell.identifier, for: indexPath) as? GenreArtistsCell else {
             return UICollectionViewCell()
         }
-        if let data = viewModel.arr?.data[indexPath.item]  {
+        if let data = viewModel.data?.data?[indexPath.item]  {
             cell.configCell(datum: data)
         }
         return cell
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        print(viewModel.arr?.data[indexPath.item].id)
-        print(viewModel.arr?.data[indexPath.item].name)
-        guard  let id = viewModel.arr?.data[indexPath.item].id else {
-            return
-        }
-        viewModel.segueToArtistOfGenre(id: String(id))
-    }
-    
 }
-
 

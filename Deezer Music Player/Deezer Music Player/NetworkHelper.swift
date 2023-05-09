@@ -51,7 +51,7 @@ extension Endpoint: EndpointProtocol {
         switch self {
         case .genre: return "/genre"
         case .artist: return "/artist"
-        case .artistsWithCatogry(id: let id): return "/genre/{\(id)}/artists"
+        case .artistsWithCatogry(id: let id): return "/genre/\(id)/artists"
         case .artistAlbums(id: let id): return "/artist/\(id)/albums"
         case .songs(id: let id): return "/album/\(id)/tracks"
         }

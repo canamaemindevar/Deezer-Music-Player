@@ -30,12 +30,30 @@ class GenreViewModel: GenreViewModelInterface {
         NetworkManager.shared.fetchGenre { response in
             switch response {
             case .success(let success):
-                print(success)
                 DispatchQueue.main.async {
                     self.arr = success
                     self.view?.mainCollectionView.reloadData()
                 }
                 
+            case .failure(let failure):
+                print(failure)
+            }
+        }
+    }
+    
+    func segueToArtistOfGenre(id: String) {
+        NetworkManager.shared.fetchGenreArtist( catagoryID: id) { response in
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+
+                    
+                    let vc = GenreArtistsView()
+                    vc.viewModel.data = success
+                    print(success)
+                    self.view?.navigationController?.pushViewController(vc, animated: true)
+                }
+
             case .failure(let failure):
                 print(failure)
             }

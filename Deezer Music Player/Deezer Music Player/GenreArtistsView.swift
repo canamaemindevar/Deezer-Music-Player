@@ -77,6 +77,14 @@ extension GenreArtistsView: UICollectionViewDelegate, UICollectionViewDataSource
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard  let id = viewModel.data?.data?[indexPath.item].id else {
+            return
+        }
+        viewModel.segueToArtist(id: String(id))
+    }
+    
     
 }
 

@@ -50,7 +50,6 @@ class GenreViewModel: GenreViewModelInterface {
                     
                     let vc = GenreArtistsView()
                     vc.viewModel.data = success
-                    print(success)
                     self.view?.navigationController?.pushViewController(vc, animated: true)
                 }
 

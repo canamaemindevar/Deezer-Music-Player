@@ -16,7 +16,7 @@ class NetworkManager {
                   
           let task = URLSession.shared.dataTask(with: endpoint.request()) { data, response, error in
               
-              if let error = error {
+              if error != nil {
                   completion(.failure(.generalError))
                   return
               }

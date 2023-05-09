@@ -16,11 +16,27 @@ protocol GenreArtistsViewModelInterface {
 class GenreArtistsViewModel: GenreArtistsViewModelInterface {
     
     var data: CatagoryArtistResponse?
-    var view: GenreArtistsView?
+   weak var view: GenreArtistsView?
     
     
     func viewDidLoad() {
         view?.prepare()
+    }
+    
+    func segueToArtist(id: String) {
+        NetworkManager.shared.fetchArtistAlbum(artistId: id) { response in
+            switch response {
+            case .success(let success):
+                DispatchQueue.main.async {
+                    let vc = ArtistView()
+                    vc.viewModel.arr = success
+                    
+                    self.view?.navigationController?.pushViewController(vc, animated: true)
+                }
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     
     

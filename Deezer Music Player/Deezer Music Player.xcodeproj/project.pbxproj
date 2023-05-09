@@ -21,6 +21,9 @@
 		A9BC813C2A0A565C00260237 /* SongsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC813B2A0A565C00260237 /* SongsResponse.swift */; };
 		A9BC813E2A0A58BF00260237 /* GenreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC813D2A0A58BF00260237 /* GenreView.swift */; };
 		A9BC81402A0A59E400260237 /* TabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC813F2A0A59E400260237 /* TabbarController.swift */; };
+		A9BC81432A0A5B8800260237 /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81422A0A5B8800260237 /* GenreCollectionViewCell.swift */; };
+		A9BC81462A0A5BDC00260237 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = A9BC81452A0A5BDC00260237 /* SDWebImage */; };
+		A9BC81482A0A5EB700260237 /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81472A0A5EB700260237 /* GenreViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,8 @@
 		A9BC813B2A0A565C00260237 /* SongsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsResponse.swift; sourceTree = "<group>"; };
 		A9BC813D2A0A58BF00260237 /* GenreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreView.swift; sourceTree = "<group>"; };
 		A9BC813F2A0A59E400260237 /* TabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarController.swift; sourceTree = "<group>"; };
+		A9BC81422A0A5B8800260237 /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
+		A9BC81472A0A5EB700260237 /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BC81462A0A5BDC00260237 /* SDWebImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +132,7 @@
 		A9BC81332A0A54FB00260237 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				A9BC81472A0A5EB700260237 /* GenreViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -133,10 +140,19 @@
 		A9BC81342A0A550100260237 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A9BC81412A0A5B7800260237 /* SubView */,
 				A9BC813D2A0A58BF00260237 /* GenreView.swift */,
-				A9BC813F2A0A59E400260237 /* TabbarController.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		A9BC81412A0A5B7800260237 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				A9BC81422A0A5B8800260237 /* GenreCollectionViewCell.swift */,
+				A9BC813F2A0A59E400260237 /* TabbarController.swift */,
+			);
+			name = SubView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +171,9 @@
 			dependencies = (
 			);
 			name = "Deezer Music Player";
+			packageProductDependencies = (
+				A9BC81452A0A5BDC00260237 /* SDWebImage */,
+			);
 			productName = "Deezer Music Player";
 			productReference = A9BC81142A0A544900260237 /* Deezer Music Player.app */;
 			productType = "com.apple.product-type.application";
@@ -183,6 +202,9 @@
 				Base,
 			);
 			mainGroup = A9BC810B2A0A544900260237;
+			packageReferences = (
+				A9BC81442A0A5BDC00260237 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+			);
 			productRefGroup = A9BC81152A0A544900260237 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -210,10 +232,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9BC81482A0A5EB700260237 /* GenreViewModel.swift in Sources */,
 				A9BC812E2A0A54B100260237 /* NetworkManager.swift in Sources */,
 				A9BC81382A0A561100260237 /* CatagoryArtistResponse.swift in Sources */,
 				A9BC811C2A0A544900260237 /* ViewController.swift in Sources */,
 				A9BC813A2A0A562C00260237 /* ArtistAlbumResponse.swift in Sources */,
+				A9BC81432A0A5B8800260237 /* GenreCollectionViewCell.swift in Sources */,
 				A9BC813E2A0A58BF00260237 /* GenreView.swift in Sources */,
 				A9BC81362A0A55ED00260237 /* GenreResponse.swift in Sources */,
 				A9BC81302A0A54BA00260237 /* NetworkHelper.swift in Sources */,
@@ -438,6 +462,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A9BC81442A0A5BDC00260237 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A9BC81452A0A5BDC00260237 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9BC81442A0A5BDC00260237 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A9BC810C2A0A544900260237 /* Project object */;
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "824153E3-2D02-4231-8CD6-668906D4A7B1"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6F6E7768-1005-43EF-A785-2F483EDDD899"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Deezer Music Player/GenreCollectionViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "configCell(datum:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6F6E7768-1005-43EF-A785-2F483EDDD899 - 4a978d640e9ceeb9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "336">
+               </Location>
+               <Location
+                  uuid = "6F6E7768-1005-43EF-A785-2F483EDDD899 - 4a978d640e9ceeb9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "52"
+                  endingLineNumber = "52"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "6F6E7768-1005-43EF-A785-2F483EDDD899 - 4a978d640e9cee3d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "56"
+                  endingLineNumber = "56"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "6F6E7768-1005-43EF-A785-2F483EDDD899 - 4a978d640e9cef52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "152">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B6675FA1-5C13-438B-8C96-C79A1E51C37E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Deezer Music Player/GenreCollectionViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "configCell(datum:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B6675FA1-5C13-438B-8C96-C79A1E51C37E - 4a978d640e9ceec6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "B6675FA1-5C13-438B-8C96-C79A1E51C37E - 4a978d640e9ceec6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "51"
+                  endingLineNumber = "51"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "B6675FA1-5C13-438B-8C96-C79A1E51C37E - 4a978d640e9cee5a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "112">
+               </Location>
+               <Location
+                  uuid = "B6675FA1-5C13-438B-8C96-C79A1E51C37E - 4a978d640e9cef73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Deezer_Music_Player.GenreCollectionViewCell.configCell(datum: Deezer_Music_Player.Datum) -&gt; ()"
+                  moduleName = "Deezer Music Player"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/emincanantalyali/Desktop/SwiftDenemeler/Deezer-Music-Player/Deezer%20Music%20Player/Deezer%20Music%20Player/GenreCollectionViewCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "112">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>

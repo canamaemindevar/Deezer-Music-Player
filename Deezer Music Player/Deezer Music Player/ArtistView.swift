@@ -76,8 +76,12 @@ extension ArtistView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        guard  let id = viewModel.arr?.data?[indexPath.row].id else {
+            return
+        }
+        viewModel.segueToAlbum(id: String(id))
     }
+    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160

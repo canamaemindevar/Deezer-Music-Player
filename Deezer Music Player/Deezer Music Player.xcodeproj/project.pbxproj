@@ -31,6 +31,8 @@
 		A9BC81522A0A784F00260237 /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81512A0A784F00260237 /* ArtistViewModel.swift */; };
 		A9BC81542A0A937900260237 /* TableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81532A0A937900260237 /* TableHeaderView.swift */; };
 		A9BC81562A0A983700260237 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81552A0A983700260237 /* AlbumCell.swift */; };
+		A9BC81582A0AA57700260237 /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81572A0AA57700260237 /* SongsView.swift */; };
+		A9BC815A2A0AA60D00260237 /* SongsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81592A0AA60D00260237 /* SongsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +61,8 @@
 		A9BC81512A0A784F00260237 /* ArtistViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
 		A9BC81532A0A937900260237 /* TableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableHeaderView.swift; sourceTree = "<group>"; };
 		A9BC81552A0A983700260237 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		A9BC81572A0AA57700260237 /* SongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsView.swift; sourceTree = "<group>"; };
+		A9BC81592A0AA60D00260237 /* SongsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 				A9BC81472A0A5EB700260237 /* GenreViewModel.swift */,
 				A9BC814B2A0A67AF00260237 /* GenreArtistsViewModel.swift */,
 				A9BC81512A0A784F00260237 /* ArtistViewModel.swift */,
+				A9BC81592A0AA60D00260237 /* SongsViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				A9BC813D2A0A58BF00260237 /* GenreView.swift */,
 				A9BC81492A0A673C00260237 /* GenreArtistsView.swift */,
 				A9BC814F2A0A768500260237 /* ArtistView.swift */,
+				A9BC81572A0AA57700260237 /* SongsView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -256,9 +262,11 @@
 				A9BC81482A0A5EB700260237 /* GenreViewModel.swift in Sources */,
 				A9BC812E2A0A54B100260237 /* NetworkManager.swift in Sources */,
 				A9BC81502A0A768500260237 /* ArtistView.swift in Sources */,
+				A9BC81582A0AA57700260237 /* SongsView.swift in Sources */,
 				A9BC81382A0A561100260237 /* CatagoryArtistResponse.swift in Sources */,
 				A9BC811C2A0A544900260237 /* ViewController.swift in Sources */,
 				A9BC81542A0A937900260237 /* TableHeaderView.swift in Sources */,
+				A9BC815A2A0AA60D00260237 /* SongsViewModel.swift in Sources */,
 				A9BC813A2A0A562C00260237 /* ArtistAlbumResponse.swift in Sources */,
 				A9BC81562A0A983700260237 /* AlbumCell.swift in Sources */,
 				A9BC81432A0A5B8800260237 /* GenreCollectionViewCell.swift in Sources */,

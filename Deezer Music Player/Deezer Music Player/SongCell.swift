@@ -7,10 +7,16 @@
 
 import UIKit
 import SDWebImage
+import AVKit
+import AVFoundation
 
 final class SongCell: UITableViewCell {
     
     static let identifier = "SongCell"
+    
+    var auidioPlayer = AVPlayer()
+    var playerItem:AVPlayerItem?
+    var url = URL(string: "")
     
     private let myView: UIView = {
         let iv = UIView()
@@ -52,6 +58,14 @@ final class SongCell: UITableViewCell {
         sView.textAlignment = .left
         return sView
     }()
+    private let playStopButton: UIButton = {
+        let sView = UIButton()
+        sView.translatesAutoresizingMaskIntoConstraints = false
+        sView.layer.cornerRadius = 5
+        sView.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        sView.addTarget(self, action: #selector(playOrStop), for: .touchUpInside)
+        return sView
+    }()
     private let timeLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +86,7 @@ final class SongCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        //translatesAutoresizingMaskIntoConstraints = false
+        
         setupConts()
     }
     
@@ -83,13 +97,14 @@ final class SongCell: UITableViewCell {
     }
     
     private func setupConts() {
+        
         backgroundColor = .clear
         contentView.addSubview(myView)
         contentView.addSubview(albumimageView)
         contentView.addSubview(stackview)
         contentView.addSubview(favoriteImageView)
         stackview.addArrangedSubview(nameLabel)
-        stackview.addArrangedSubview(timeLabel)
+        stackview.addArrangedSubview(playStopButton)
         
         NSLayoutConstraint.activate([
             myView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
@@ -115,7 +130,7 @@ final class SongCell: UITableViewCell {
             stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: albumimageView.trailingAnchor, multiplier: 2),
             stackview.topAnchor.constraint(equalToSystemSpacingBelow: myView.topAnchor, multiplier: 0),
             myView.trailingAnchor.constraint(equalToSystemSpacingAfter: stackview.trailingAnchor, multiplier: 2),
-            stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: -0.5)
+            stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: 0)
         ])
         
     }
@@ -126,5 +141,42 @@ final class SongCell: UITableViewCell {
         albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
         nameLabel.text = datum.title
         timeLabel.text = datum.link
+        url = URL(string: datum.preview ?? "")
+        
+        playerItem = AVPlayerItem(url: url!)
+        auidioPlayer = AVPlayer(playerItem: playerItem)
+        
+        
+        
+       
+
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+    }
+    
+    
+    @objc func playerDidFinishPlaying(sender: Notification) {
+        auidioPlayer.pause()
+        playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+       // auidioPlayer.rate = 2
+    }
+    
+    @objc func playOrStop() {
+        
+        
+
+            if auidioPlayer.rate == 0 {
+                  auidioPlayer.play()
+                
+                  
+                
+                playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                
+            } else {
+                auidioPlayer.pause()
+                playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+               // auidioPlayer.rate = 0
+            }
+        
+        
     }
 }

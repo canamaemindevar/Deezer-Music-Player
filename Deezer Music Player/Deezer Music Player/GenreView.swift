@@ -79,8 +79,6 @@ extension GenreView: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print(viewModel.arr?.data[indexPath.item].id as Any)
-        print(viewModel.arr?.data[indexPath.item].name as Any)
         guard  let id = viewModel.arr?.data[indexPath.item].id else {
             return
         }

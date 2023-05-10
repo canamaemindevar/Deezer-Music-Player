@@ -25,7 +25,7 @@ class NetworkManager {
                   completion(.failure(.responseError))
                   return
               }
-              print(response.statusCode)
+              //print(response.statusCode)
               guard let data = data else {
                   completion(.failure(.noData))
                   return

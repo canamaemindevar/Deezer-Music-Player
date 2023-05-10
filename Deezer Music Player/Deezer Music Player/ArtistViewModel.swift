@@ -30,7 +30,6 @@ class ArtistViewModel: ArtistViewModelInterface {
                 DispatchQueue.main.async {
                     let vc = SongsView()
                     vc.viewModel.arr = success
-                    print(success)
                     self.view?.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let failure):

@@ -4,17 +4,21 @@
 //
 //  Created by Emincan Antalyalı on 9.05.2023.
 //
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let songsResponse = try? JSONDecoder().decode(SongsResponse.self, from: jsonData)
 
 import Foundation
 
 // MARK: - SongsResponse
 struct SongsResponse: Codable {
-    let data: [SongDatum]?
+    let data: [SongsResponseDatum]?
     let total: Int?
 }
 
 // MARK: - Datum
-struct SongDatum: Codable {
+struct SongsResponseDatum: Codable {
     let id: Int?
     let readable: Bool?
     let title, titleShort, titleVersion, isrc: String?
@@ -23,9 +27,9 @@ struct SongDatum: Codable {
     let explicitLyrics: Bool?
     let explicitContentLyrics, explicitContentCover: Int?
     let preview: String?
-    let md5Image: Md5Image?
+    let md5Image: String?
     let artist: Artist?
-    let type: DatumType?
+    let type: String?
 
     enum CodingKeys: String, CodingKey {
         case id, readable, title
@@ -44,26 +48,11 @@ struct SongDatum: Codable {
     }
 }
 
-//MARK: - Artist
+// MARK: - Artist
 struct Artist: Codable {
     let id: Int?
-    let name: Name?
+    let name: String?
     let tracklist: String?
-    let type: ArtistType?
+    let type: String?
 }
 
-enum Name: String, Codable {
-    case daftPunk = "Daft Punk"
-}
-
-enum ArtistType: String, Codable {
-    case artist = "artist"
-}
-
-enum Md5Image: String, Codable {
-    case the2E018122Cb56986277102D2041A592C8 = "2e018122cb56986277102d2041a592c8"
-}
-
-enum DatumType: String, Codable {
-    case track = "track"
-}

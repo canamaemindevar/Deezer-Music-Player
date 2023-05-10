@@ -24,7 +24,6 @@ class SongsView: UIViewController {
     var auidioPlayer = AVPlayer()
     var playerItem:AVPlayerItem?
     var url = URL(string: "")
-    var delegate: SongCellInterface?
      lazy var viewModel = SongsViewModel()
     
     private let tableView: UITableView = {
@@ -56,7 +55,7 @@ extension SongsView: SongsViewInterface {
         tableView.delegate = self
         tableView.dataSource = self
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+
     }
     
     
@@ -79,12 +78,7 @@ extension SongsView: SongPlayAble {
         playOrStop()
     }
     
-  
-//    @objc func playerDidFinishPlaying(sender: Notification) {
-//        auidioPlayer.pause()
-//      //  playOrStop()
-//        auidioPlayer.replaceCurrentItem(with: nil)
-//    }
+
     
 }
 

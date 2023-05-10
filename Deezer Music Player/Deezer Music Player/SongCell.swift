@@ -10,10 +10,6 @@ import SDWebImage
 import AVKit
 import AVFoundation
 
-protocol SongCellInterface {
-    func changeButonImageToPlay()
-    func changeButonImageStop()
-}
 
 final class SongCell: UITableViewCell {
     
@@ -147,6 +143,7 @@ final class SongCell: UITableViewCell {
         timeLabel.text = datum.link
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: delegate?.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: delegate?.playerItem)
     }
     
     @objc func playOrStop() {
@@ -165,12 +162,17 @@ final class SongCell: UITableViewCell {
         changeButonImageToPlay()
         delegate?.auidioPlayer.replaceCurrentItem(with: nil)
     }
+    @objc func musicChanged(sender: Notification) {
+        delegate?.auidioPlayer.replaceCurrentItem(with: nil)
+        delegate?.auidioPlayer.pause()
+    }
+
 }
 
-extension SongCell: SongCellInterface {
+extension SongCell {
     func changeButonImageToPlay() {
         playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        
+        delegate?.playOrStop()
     }
     
     func changeButonImageStop() {

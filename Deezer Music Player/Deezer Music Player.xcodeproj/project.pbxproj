@@ -33,6 +33,7 @@
 		A9BC81562A0A983700260237 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81552A0A983700260237 /* AlbumCell.swift */; };
 		A9BC81582A0AA57700260237 /* SongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81572A0AA57700260237 /* SongsView.swift */; };
 		A9BC815A2A0AA60D00260237 /* SongsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BC81592A0AA60D00260237 /* SongsViewModel.swift */; };
+		A9C95D092A0B8AFF00BDDABD /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D082A0B8AFF00BDDABD /* SongCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +64,7 @@
 		A9BC81552A0A983700260237 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
 		A9BC81572A0AA57700260237 /* SongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsView.swift; sourceTree = "<group>"; };
 		A9BC81592A0AA60D00260237 /* SongsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongsViewModel.swift; sourceTree = "<group>"; };
+		A9C95D082A0B8AFF00BDDABD /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 				A9BC814D2A0A6C6100260237 /* GenreArtistsCell.swift */,
 				A9BC81532A0A937900260237 /* TableHeaderView.swift */,
 				A9BC81552A0A983700260237 /* AlbumCell.swift */,
+				A9C95D082A0B8AFF00BDDABD /* SongCell.swift */,
 			);
 			name = SubView;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				A9BC81302A0A54BA00260237 /* NetworkHelper.swift in Sources */,
 				A9BC81402A0A59E400260237 /* TabbarController.swift in Sources */,
 				A9BC814A2A0A673C00260237 /* GenreArtistsView.swift in Sources */,
+				A9C95D092A0B8AFF00BDDABD /* SongCell.swift in Sources */,
 				A9BC814E2A0A6C6100260237 /* GenreArtistsCell.swift in Sources */,
 				A9BC81182A0A544900260237 /* AppDelegate.swift in Sources */,
 				A9BC813C2A0A565C00260237 /* SongsResponse.swift in Sources */,

@@ -22,7 +22,7 @@ class SongsView: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
         tableView.separatorColor = .systemGray
-       // tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SongCell.self, forCellReuseIdentifier: SongCell.identifier)
         tableView.layer.cornerRadius = 0
         
         return tableView
@@ -56,11 +56,18 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text =  viewModel.arr?.data?[indexPath.row].title
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCell.identifier, for: indexPath) as? SongCell else {
+            return UITableViewCell()
+        }
+        if let data = viewModel.arr?.data?[indexPath.row] {
+            cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "")
+        }
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 160
+    }
     
 }
 

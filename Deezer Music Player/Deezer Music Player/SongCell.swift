@@ -1,16 +1,16 @@
 //
-//  AlbumCell.swift
+//  SongCell.swift
 //  Deezer Music Player
 //
-//  Created by Emincan Antalyalı on 9.05.2023.
+//  Created by Emincan Antalyalı on 10.05.2023.
 //
 
 import UIKit
 import SDWebImage
 
-final class AlbumCell: UITableViewCell {
+final class SongCell: UITableViewCell {
     
-    static let identifier = "AlbumCell"
+    static let identifier = "SongCell"
     
     private let myView: UIView = {
         let iv = UIView()
@@ -33,17 +33,26 @@ final class AlbumCell: UITableViewCell {
         return iv
     }()
     
+    private let favoriteImageView: UIImageView = {
+        let iv = UIImageView()
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
+        iv.image = .init(systemName: "bolt.heart")
+        iv.tintColor = .label
+        iv.layer.cornerRadius = 5
+        return iv
+    }()
+    
     private let nameLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.textColor = .label
-        sView.numberOfLines = 0
         sView.font = .boldSystemFont(ofSize: 20)
         sView.textAlignment = .left
         return sView
     }()
-    private let dateLabel: UILabel = {
+    private let timeLabel: UILabel = {
         let sView = UILabel()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
@@ -58,7 +67,6 @@ final class AlbumCell: UITableViewCell {
         sView.layer.cornerRadius = 5
         sView.axis = .vertical
         sView.distribution = .fillProportionally
-        sView.alignment = .leading
         return sView
     }()
     
@@ -79,8 +87,9 @@ final class AlbumCell: UITableViewCell {
         contentView.addSubview(myView)
         contentView.addSubview(albumimageView)
         contentView.addSubview(stackview)
+        contentView.addSubview(favoriteImageView)
         stackview.addArrangedSubview(nameLabel)
-        stackview.addArrangedSubview(dateLabel)
+        stackview.addArrangedSubview(timeLabel)
         
         NSLayoutConstraint.activate([
             myView.leadingAnchor.constraint(equalToSystemSpacingAfter: leadingAnchor, multiplier: 1),
@@ -95,22 +104,27 @@ final class AlbumCell: UITableViewCell {
             myView.bottomAnchor.constraint(equalToSystemSpacingBelow: albumimageView.bottomAnchor, multiplier: 0.5),
             albumimageView.widthAnchor.constraint(equalTo: myView.heightAnchor)
         ])
+        let size = 40.0
+        NSLayoutConstraint.activate([
+            favoriteImageView.topAnchor.constraint(equalTo: myView.topAnchor),
+            favoriteImageView.trailingAnchor.constraint(equalTo: myView.trailingAnchor),
+            favoriteImageView.heightAnchor.constraint(equalToConstant: size),
+            favoriteImageView.widthAnchor.constraint(equalToConstant: size)
+        ])
         NSLayoutConstraint.activate([
             stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: albumimageView.trailingAnchor, multiplier: 2),
             stackview.topAnchor.constraint(equalToSystemSpacingBelow: myView.topAnchor, multiplier: 0),
             myView.trailingAnchor.constraint(equalToSystemSpacingAfter: stackview.trailingAnchor, multiplier: 2),
-            stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: 0)
+            stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: -0.5)
         ])
         
     }
     
     
-    func config(datum:ArtistAlbumDatum) {
-        guard let url = datum.coverMedium else {
-            return
-        }
-        albumimageView.sd_setImage(with: URL(string: url) )
+    func config(datum:SongsResponseDatum, albumImageUrl: String) {
+        
+        albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
         nameLabel.text = datum.title
-        dateLabel.text = datum.releaseDate
+        timeLabel.text = datum.link
     }
 }

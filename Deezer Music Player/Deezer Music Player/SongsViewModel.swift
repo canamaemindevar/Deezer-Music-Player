@@ -15,6 +15,7 @@ protocol SongsViewModelInterface {
 class SongsViewModel: SongsViewModelInterface {
     
    var arr: SongsResponse?
+   var albumPicUrl: String? 
     
    weak var view: SongsView?
     

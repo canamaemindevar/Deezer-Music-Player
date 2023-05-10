@@ -21,7 +21,7 @@ class ArtistView: UIViewController {
         let tableView = UITableView(frame: .zero,style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
-        //tableView.separatorColor = .systemGray
+        tableView.separatorColor = .clear
         tableView.register(AlbumCell.self, forCellReuseIdentifier: AlbumCell.identifier)
         tableView.layer.cornerRadius = 0
         
@@ -63,8 +63,7 @@ extension ArtistView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell()
-//        cell.textLabel?.text = viewModel.arr?.data?[indexPath.row].title
+
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: AlbumCell.identifier, for: indexPath) as? AlbumCell else {
             return UITableViewCell()
@@ -79,7 +78,7 @@ extension ArtistView: UITableViewDelegate, UITableViewDataSource {
         guard  let id = viewModel.arr?.data?[indexPath.row].id else {
             return
         }
-        viewModel.segueToAlbum(id: String(id))
+        viewModel.segueToAlbum(id: String(id), picUrl: viewModel.arr?.data?.first?.coverMedium ?? "")
     }
     
     

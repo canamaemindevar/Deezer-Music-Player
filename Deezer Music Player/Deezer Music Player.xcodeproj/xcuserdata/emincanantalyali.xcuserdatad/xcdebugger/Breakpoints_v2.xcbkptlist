@@ -14,8 +14,8 @@
             filePath = "Deezer Music Player/ArtistView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
             endingLineNumber = "26"
-            landmarkName = "segueToAlbum(id:)"
+            landmarkName = "segueToAlbum(id:picUrl:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "segueToAlbum(id:)"
+            landmarkName = "segueToAlbum(id:picUrl:)"
             landmarkType = "7">
             <Locations>
                <Location

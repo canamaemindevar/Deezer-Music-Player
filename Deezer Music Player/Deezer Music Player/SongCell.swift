@@ -10,14 +10,18 @@ import SDWebImage
 import AVKit
 import AVFoundation
 
+protocol SongCellInterface {
+    func changeButonImageToPlay()
+    func changeButonImageStop()
+}
+
 final class SongCell: UITableViewCell {
     
     static let identifier = "SongCell"
     
-    var auidioPlayer = AVPlayer()
-    var playerItem:AVPlayerItem?
-    var url = URL(string: "")
-    
+    var delegate: SongPlayAble?
+    var songView: SongsView?
+    var songsResponseDatum: SongsResponseDatum?
     private let myView: UIView = {
         let iv = UIView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -137,46 +141,45 @@ final class SongCell: UITableViewCell {
     
     
     func config(datum:SongsResponseDatum, albumImageUrl: String) {
-        
+        self.songsResponseDatum = datum
         albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
         nameLabel.text = datum.title
         timeLabel.text = datum.link
-        url = URL(string: datum.preview ?? "")
         
-        playerItem = AVPlayerItem(url: url!)
-        auidioPlayer = AVPlayer(playerItem: playerItem)
-        
-        
-        
-       
-
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
-    }
-    
-    
-    @objc func playerDidFinishPlaying(sender: Notification) {
-        auidioPlayer.pause()
-        playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-       // auidioPlayer.rate = 2
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: delegate?.playerItem)
     }
     
     @objc func playOrStop() {
         
-        
-
-            if auidioPlayer.rate == 0 {
-                  auidioPlayer.play()
-                
-                  
-                
-                playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-                
-            } else {
-                auidioPlayer.pause()
-                playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-               // auidioPlayer.rate = 0
-            }
+        if playStopButton.currentImage == UIImage(systemName: "stop.fill") {
+            changeButonImageToPlay()
+        } else {
+            changeButonImageStop()
+        }
         
         
     }
+    
+    @objc func playerDidFinishPlaying(sender: Notification) {
+        delegate?.auidioPlayer.pause()
+        changeButonImageToPlay()
+        delegate?.auidioPlayer.replaceCurrentItem(with: nil)
+    }
 }
+
+extension SongCell: SongCellInterface {
+    func changeButonImageToPlay() {
+        playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+    }
+    
+    func changeButonImageStop() {
+        playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        delegate?.setMusic(songUrl: self.songsResponseDatum?.preview ?? "")
+    }
+    
+   
+    
+    
+}
+

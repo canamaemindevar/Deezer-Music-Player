@@ -91,15 +91,18 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCell.identifier, for: indexPath) as? SongCell else {
             return UITableViewCell()
         }
-        if let data = viewModel.arr?.data?[indexPath.row] {
-            cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "")
-            for i in viewModel.favIdArr {
-                if i == data.id {
-                    cell.config(datum: data, albumImageUrl:" viewModel.albumPicUrl" )
-                }
-
-            }
+        guard let data = viewModel.arr?.data?[indexPath.row] else {
+            return UITableViewCell()
         }
+        cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: false)
+        print(data.id)
+        viewModel.favIdArr.forEach { id in
+            if id == data.id {
+                cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: true)
+        }
+
+         }
+         
         cell.delegate = self
         
         

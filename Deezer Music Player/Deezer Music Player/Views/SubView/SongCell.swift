@@ -15,9 +15,11 @@ final class SongCell: UITableViewCell {
     
     static let identifier = "SongCell"
     
+    //MARK: - Components
     var delegate: SongPlayAble?
-    var songView: SongsView?
     var songsResponseDatum: SongsResponseDatum?
+    var isFavedSong = false
+    
     private let myView: UIView = {
         let iv = UIView()
         iv.translatesAutoresizingMaskIntoConstraints = false
@@ -39,15 +41,6 @@ final class SongCell: UITableViewCell {
         return iv
     }()
     
-//    private let favoriteImageView: UIImageView = {
-//        let iv = UIImageView()
-//        iv.translatesAutoresizingMaskIntoConstraints = false
-//        iv.contentMode = .scaleAspectFit
-//        iv.image = .init(systemName: "bolt.heart")
-//        iv.tintColor = .label
-//        iv.layer.cornerRadius = 5
-//        return iv
-//    }()
     private let saveButton: UIButton = {
         let sView = UIButton()
         sView.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +57,7 @@ final class SongCell: UITableViewCell {
         sView.textColor = .label
         sView.font = .boldSystemFont(ofSize: 20)
         sView.textAlignment = .left
+        sView.numberOfLines = 0
         return sView
     }()
     private let playStopButton: UIButton = {
@@ -110,7 +104,6 @@ final class SongCell: UITableViewCell {
         contentView.addSubview(myView)
         contentView.addSubview(albumimageView)
         contentView.addSubview(stackview)
-       // contentView.addSubview(favoriteImageView)
         contentView.addSubview(saveButton)
         stackview.addArrangedSubview(nameLabel)
         stackview.addArrangedSubview(playStopButton)
@@ -128,7 +121,7 @@ final class SongCell: UITableViewCell {
             myView.bottomAnchor.constraint(equalToSystemSpacingBelow: albumimageView.bottomAnchor, multiplier: 0.5),
             albumimageView.widthAnchor.constraint(equalTo: myView.heightAnchor)
         ])
-        let size = 40.0
+        let size = 50.0
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: myView.topAnchor),
             saveButton.trailingAnchor.constraint(equalTo: myView.trailingAnchor),
@@ -138,52 +131,76 @@ final class SongCell: UITableViewCell {
         NSLayoutConstraint.activate([
             stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: albumimageView.trailingAnchor, multiplier: 2),
             stackview.topAnchor.constraint(equalToSystemSpacingBelow: myView.topAnchor, multiplier: 0),
-            myView.trailingAnchor.constraint(equalToSystemSpacingAfter: stackview.trailingAnchor, multiplier: 2),
+            stackview.trailingAnchor.constraint(equalToSystemSpacingAfter: saveButton.leadingAnchor, multiplier: 1),
             stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: 0)
         ])
     }
     
     
-    func config(datum:SongsResponseDatum, albumImageUrl: String) {
+
+}
+//MARK: - Ui Funcs
+extension SongCell {
+    
+    func config(datum:SongsResponseDatum, albumImageUrl: String, isFavedSong: Bool) {
         self.songsResponseDatum = datum
         albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
         nameLabel.text = datum.title
         timeLabel.text = datum.link
+        changeFavButtonImage(bool: isFavedSong)
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: delegate?.playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: delegate?.playerItem)
     }
     
-    @objc func playOrStop() {
-        
+    @objc private func playOrStop() {
+
         if playStopButton.currentImage == UIImage(systemName: "stop.fill") {
             changeButonImageToPlay()
         } else {
             changeButonImageStop()
         }
-        
-        
+
+
     }
     
-    @objc func playerDidFinishPlaying(sender: Notification) {
+    @objc private func playerDidFinishPlaying(sender: Notification) {
         delegate?.auidioPlayer.pause()
         changeButonImageToPlay()
         delegate?.auidioPlayer.replaceCurrentItem(with: nil)
     }
-    @objc func musicChanged(sender: Notification) {
+    @objc private func musicChanged(sender: Notification) {
         delegate?.auidioPlayer.replaceCurrentItem(with: nil)
         delegate?.auidioPlayer.pause()
     }
 
-    @objc func saveToCoreData() {
-        print("bastın")
+    @objc private func  saveToCoreData() {
         guard let data = songsResponseDatum else {
             return
         }
-        CoreDataManager.shared.saveCoreData(withModel: data)
+        if isFavedSong == false {
+          
+            CoreDataManager.shared.saveCoreData(withModel: data)
+            changeFavButtonImage(bool: true)
+        } else {
+            CoreDataManager.shared.deleteCoreData(with: data.id)
+           changeFavButtonImage(bool: false)
+           
+        }
+    }
+    
+    private func changeFavButtonImage(bool: Bool) {
+        if bool == true {
+            isFavedSong = bool
+            saveButton.setImage(UIImage(systemName: "heart.slash.fill"), for: .normal)
+        } else {
+            isFavedSong = bool
+            saveButton.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
+        }
     }
 }
 
+//MARK: - Auido Funcs
 extension SongCell {
     func changeButonImageToPlay() {
         playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)

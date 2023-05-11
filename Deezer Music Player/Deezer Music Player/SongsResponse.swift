@@ -19,17 +19,17 @@ struct SongsResponse: Codable {
 
 // MARK: - Datum
 struct SongsResponseDatum: Codable {
-    let id: Int?
-    let readable: Bool?
-    let title, titleShort, titleVersion, isrc: String?
-    let link: String?
-    let duration, trackPosition, diskNumber, rank: Int?
-    let explicitLyrics: Bool?
-    let explicitContentLyrics, explicitContentCover: Int?
-    let preview: String?
-    let md5Image: String?
-    let artist: Artist?
-    let type: String?
+    let id: Int
+    let readable: Bool
+    let title, titleShort, titleVersion, isrc: String
+    let link: String
+    let duration, trackPosition, diskNumber, rank: Int
+    let explicitLyrics: Bool
+    let explicitContentLyrics, explicitContentCover: Int
+    let preview: String
+    let md5Image: String
+    let artist: Artist
+    let type: String
 
     enum CodingKeys: String, CodingKey {
         case id, readable, title
@@ -50,9 +50,9 @@ struct SongsResponseDatum: Codable {
 
 // MARK: - Artist
 struct Artist: Codable {
-    let id: Int?
-    let name: String?
-    let tracklist: String?
-    let type: String?
+    let id: Int
+    let name: String
+    let tracklist: String
+    let type: String
 }
 

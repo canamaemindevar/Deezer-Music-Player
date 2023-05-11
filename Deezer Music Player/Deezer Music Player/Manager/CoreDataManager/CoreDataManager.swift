@@ -20,10 +20,8 @@ class CoreDataManager{
             
             let entityDescription = NSEntityDescription.insertNewObject(forEntityName: "SongData", into: context)
             
-            guard let withModelid = withModel.id  else {
-                return
-            }
-            entityDescription.setValue(withModelid, forKey: "id")
+
+            entityDescription.setValue(withModel.id, forKey: "id")
             entityDescription.setValue(withModel.preview, forKey: "preview")
             entityDescription.setValue(withModel.title, forKey: "title")
             entityDescription.setValue(withModel.diskNumber, forKey: "diskNumber")
@@ -41,10 +39,10 @@ class CoreDataManager{
             entityDescription.setValue(withModel.trackPosition, forKey: "trackPosition")
             entityDescription.setValue(withModel.type, forKey: "type")
             // for artist
-            entityDescription.setValue(withModel.artist?.id, forKey: "artistID")
-            entityDescription.setValue(withModel.artist?.name, forKey: "artistName")
-            entityDescription.setValue(withModel.artist?.tracklist, forKey: "artistTracklist")
-            entityDescription.setValue(withModel.artist?.type, forKey: "artistType")
+            entityDescription.setValue(withModel.artist.id, forKey: "artistID")
+            entityDescription.setValue(withModel.artist.name, forKey: "artistName")
+            entityDescription.setValue(withModel.artist.tracklist, forKey: "artistTracklist")
+            entityDescription.setValue(withModel.artist.type, forKey: "artistType")
             
             
             do{
@@ -77,12 +75,12 @@ class CoreDataManager{
                     for result in results as! [NSManagedObject] {
                         
                         context.delete(result)
-                        print("sildim mi")
+                   //     print("Delete?")
                         do {
                             try context.save()
-                            print("Sildim")
+                            print("Deleted")
                         } catch  {
-                            print("error saving")
+                            print("error deleting")
                         }
                         
                     }
@@ -107,7 +105,7 @@ class CoreDataManager{
                 let results = try context.fetch(fetchRequest)
                 for result in results as! [NSManagedObject] {
                     AnArray.append(SongsResponseDatum(id: result.value(forKey: "id") as! Int,
-                                                      readable: result.value(forKey: "readable") as? Bool,
+                                                      readable: result.value(forKey: "readable") as? Bool ?? false,
                                                       title: result.value(forKey: "title") as! String,
                                                       titleShort: result.value(forKey: "titleShort") as! String,
                                                       titleVersion: result.value(forKey: "titleVersion") as! String,
@@ -117,16 +115,16 @@ class CoreDataManager{
                                                       trackPosition: result.value(forKey: "trackPosition") as! Int,
                                                       diskNumber: result.value(forKey: "diskNumber") as! Int,
                                                       rank: result.value(forKey: "rank") as! Int,
-                                                      explicitLyrics: result.value(forKey: "explicitLyrics") as? Bool,
+                                                      explicitLyrics: result.value(forKey: "explicitLyrics") as? Bool ?? false,
                                                       explicitContentLyrics: result.value(forKey: "explicitContentLyrics") as! Int,
                                                       explicitContentCover: result.value(forKey: "explicitContentCover") as! Int,
                                                       preview: result.value(forKey: "preview") as! String,
                                                       md5Image: result.value(forKey: "md5Image") as! String,
                                                       // for artist
-                                                      artist: Artist(id: result.value(forKey: "artistID") as? Int,
-                                                                     name: result.value(forKey: "artistName") as? String,
-                                                                     tracklist: result.value(forKey: "artistTracklist") as? String,
-                                                                     type: result.value(forKey: "artistType") as? String) ,
+                                                      artist: Artist(id: result.value(forKey: "artistID") as? Int ?? 0,
+                                                                     name: result.value(forKey: "artistName") as? String ?? "",
+                                                                     tracklist: result.value(forKey: "artistTracklist") as? String ?? "",
+                                                                     type: result.value(forKey: "artistType") as? String ?? "") ,
                                                       type: result.value(forKey: "type") as! String))
                 }
                 completion(.success(AnArray))

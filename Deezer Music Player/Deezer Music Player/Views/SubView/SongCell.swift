@@ -16,7 +16,7 @@ final class SongCell: UITableViewCell {
     static let identifier = "SongCell"
     
     //MARK: - Components
-    var delegate: SongPlayAble?
+    var songDelegate: SongPlayAble?
     var songsResponseDatum: SongsResponseDatum?
     var isFavedSong = false
     
@@ -46,7 +46,6 @@ final class SongCell: UITableViewCell {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
-        sView.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
         return sView
     }()
     
@@ -65,7 +64,6 @@ final class SongCell: UITableViewCell {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        sView.addTarget(self, action: #selector(playOrStop), for: .touchUpInside)
         return sView
     }()
     private let timeLabel: UILabel = {
@@ -90,6 +88,8 @@ final class SongCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupConts()
+        saveButton.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
+        playStopButton.addTarget(self, action: #selector(playOrStop), for: .touchUpInside)
     }
     
     
@@ -149,8 +149,8 @@ extension SongCell {
         timeLabel.text = datum.link
         changeFavButtonImage(bool: isFavedSong)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: delegate?.playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: delegate?.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: songDelegate?.playerItem)
+        NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: songDelegate?.playerItem)
     }
     
     @objc private func playOrStop() {
@@ -165,13 +165,13 @@ extension SongCell {
     }
     
     @objc private func playerDidFinishPlaying(sender: Notification) {
-        delegate?.auidioPlayer.pause()
+        songDelegate?.auidioPlayer.pause()
         changeButonImageToPlay()
-        delegate?.auidioPlayer.replaceCurrentItem(with: nil)
+        songDelegate?.auidioPlayer.replaceCurrentItem(with: nil)
     }
     @objc private func musicChanged(sender: Notification) {
-        delegate?.auidioPlayer.replaceCurrentItem(with: nil)
-        delegate?.auidioPlayer.pause()
+        songDelegate?.auidioPlayer.replaceCurrentItem(with: nil)
+        songDelegate?.auidioPlayer.pause()
     }
 
     @objc private func  saveToCoreData() {
@@ -204,12 +204,12 @@ extension SongCell {
 extension SongCell {
     func changeButonImageToPlay() {
         playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        delegate?.playOrStop()
+        songDelegate?.playOrStop()
     }
     
     func changeButonImageStop() {
         playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-        delegate?.setMusic(songUrl: self.songsResponseDatum?.preview ?? "")
+        songDelegate?.setMusic(songUrl: self.songsResponseDatum?.preview ?? "")
     }
     
    

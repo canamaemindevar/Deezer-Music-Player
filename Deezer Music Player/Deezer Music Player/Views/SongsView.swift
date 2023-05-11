@@ -95,7 +95,6 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
             return UITableViewCell()
         }
         cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: false)
-        print(data.id)
         viewModel.favIdArr.forEach { id in
             if id == data.id {
                 cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: true)
@@ -103,7 +102,7 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
 
          }
          
-        cell.delegate = self
+        cell.songDelegate = self
         
         
         

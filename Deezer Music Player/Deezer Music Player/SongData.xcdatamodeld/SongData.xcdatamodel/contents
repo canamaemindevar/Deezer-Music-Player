@@ -5,7 +5,6 @@
         <attribute name="artistName" optional="YES" attributeType="String"/>
         <attribute name="artistTracklist" optional="YES" attributeType="String"/>
         <attribute name="artistType" optional="YES" attributeType="String"/>
-        <attribute name="attribute" optional="YES" attributeType="Transformable"/>
         <attribute name="diskNumber" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="duration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="explicitContentCover" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

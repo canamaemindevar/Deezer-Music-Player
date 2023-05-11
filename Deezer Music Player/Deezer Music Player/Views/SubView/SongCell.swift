@@ -39,14 +39,22 @@ final class SongCell: UITableViewCell {
         return iv
     }()
     
-    private let favoriteImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
-        iv.image = .init(systemName: "bolt.heart")
-        iv.tintColor = .label
-        iv.layer.cornerRadius = 5
-        return iv
+//    private let favoriteImageView: UIImageView = {
+//        let iv = UIImageView()
+//        iv.translatesAutoresizingMaskIntoConstraints = false
+//        iv.contentMode = .scaleAspectFit
+//        iv.image = .init(systemName: "bolt.heart")
+//        iv.tintColor = .label
+//        iv.layer.cornerRadius = 5
+//        return iv
+//    }()
+    private let saveButton: UIButton = {
+        let sView = UIButton()
+        sView.translatesAutoresizingMaskIntoConstraints = false
+        sView.layer.cornerRadius = 5
+        sView.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
+        sView.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
+        return sView
     }()
     
     private let nameLabel: UILabel = {
@@ -102,7 +110,8 @@ final class SongCell: UITableViewCell {
         contentView.addSubview(myView)
         contentView.addSubview(albumimageView)
         contentView.addSubview(stackview)
-        contentView.addSubview(favoriteImageView)
+       // contentView.addSubview(favoriteImageView)
+        contentView.addSubview(saveButton)
         stackview.addArrangedSubview(nameLabel)
         stackview.addArrangedSubview(playStopButton)
         
@@ -121,10 +130,10 @@ final class SongCell: UITableViewCell {
         ])
         let size = 40.0
         NSLayoutConstraint.activate([
-            favoriteImageView.topAnchor.constraint(equalTo: myView.topAnchor),
-            favoriteImageView.trailingAnchor.constraint(equalTo: myView.trailingAnchor),
-            favoriteImageView.heightAnchor.constraint(equalToConstant: size),
-            favoriteImageView.widthAnchor.constraint(equalToConstant: size)
+            saveButton.topAnchor.constraint(equalTo: myView.topAnchor),
+            saveButton.trailingAnchor.constraint(equalTo: myView.trailingAnchor),
+            saveButton.heightAnchor.constraint(equalToConstant: size),
+            saveButton.widthAnchor.constraint(equalToConstant: size)
         ])
         NSLayoutConstraint.activate([
             stackview.leadingAnchor.constraint(equalToSystemSpacingAfter: albumimageView.trailingAnchor, multiplier: 2),
@@ -132,7 +141,6 @@ final class SongCell: UITableViewCell {
             myView.trailingAnchor.constraint(equalToSystemSpacingAfter: stackview.trailingAnchor, multiplier: 2),
             stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: 0)
         ])
-        
     }
     
     
@@ -167,6 +175,13 @@ final class SongCell: UITableViewCell {
         delegate?.auidioPlayer.pause()
     }
 
+    @objc func saveToCoreData() {
+        print("bastın")
+        guard let data = songsResponseDatum else {
+            return
+        }
+        CoreDataManager.shared.saveCoreData(withModel: data)
+    }
 }
 
 extension SongCell {

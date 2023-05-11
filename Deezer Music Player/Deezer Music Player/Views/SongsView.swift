@@ -93,8 +93,16 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
         }
         if let data = viewModel.arr?.data?[indexPath.row] {
             cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "")
+            for i in viewModel.favIdArr {
+                if i == data.id {
+                    cell.config(datum: data, albumImageUrl:" viewModel.albumPicUrl" )
+                }
+
+            }
         }
         cell.delegate = self
+        
+        
         
         return cell
     }

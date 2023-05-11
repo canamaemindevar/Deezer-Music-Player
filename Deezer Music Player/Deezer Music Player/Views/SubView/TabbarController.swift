@@ -14,17 +14,17 @@ class TabbarViewController: UITabBarController {
 
 
             let vc1 = UINavigationController(rootViewController: GenreView())
-            
+            let vc2 = UINavigationController(rootViewController: FavoriSongsView())
             
             vc1.tabBarItem.image = UIImage(systemName: "music.note")
-           
+            vc2.tabBarItem.image = UIImage(systemName: "star")
             
             vc1.title = "Katagoriler"
-            
+            vc2.title = "Favoriler"
             
             tabBar.tintColor = .label
             
-            setViewControllers([vc1], animated: true)
+            setViewControllers([vc1,vc2], animated: true)
             }
     
 }

@@ -24,14 +24,14 @@ class ArtistViewModel: ArtistViewModelInterface {
     
     
     func segueToAlbum(id: String, picUrl: String) {
-        NetworkManager.shared.fetchAlbumSongs(albumId: id) { response in
+        NetworkManager.shared.fetchAlbumSongs(albumId: id) {[weak self] response in
             switch response {
             case .success(let success):
                 DispatchQueue.main.async {
                     let vc = SongsView()
                     vc.viewModel.arr = success
                     vc.viewModel.albumPicUrl = picUrl
-                    self.view?.navigationController?.pushViewController(vc, animated: true)
+                    self?.view?.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let failure):
                 print(failure)

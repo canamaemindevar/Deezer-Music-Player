@@ -43,6 +43,7 @@ class CoreDataManager{
             entityDescription.setValue(withModel.artist.name, forKey: "artistName")
             entityDescription.setValue(withModel.artist.tracklist, forKey: "artistTracklist")
             entityDescription.setValue(withModel.artist.type, forKey: "artistType")
+            entityDescription.setValue(withModel.imageUrl, forKey: "imageUrl")
             
             
             do{
@@ -107,9 +108,9 @@ class CoreDataManager{
                     AnArray.append(SongsResponseDatum(id: result.value(forKey: "id") as! Int,
                                                       readable: result.value(forKey: "readable") as? Bool ?? false,
                                                       title: result.value(forKey: "title") as! String,
-                                                      titleShort: result.value(forKey: "titleShort") as! String,
-                                                      titleVersion: result.value(forKey: "titleVersion") as! String,
-                                                      isrc: result.value(forKey: "isrc") as! String,
+                                                      titleShort: result.value(forKey: "titleShort") as? String,
+                                                      titleVersion: result.value(forKey: "titleVersion") as? String,
+                                                      isrc: result.value(forKey: "isrc") as? String,
                                                       link: result.value(forKey: "link") as! String,
                                                       duration: result.value(forKey: "duration") as! Int,
                                                       trackPosition: result.value(forKey: "trackPosition") as! Int,
@@ -120,12 +121,14 @@ class CoreDataManager{
                                                       explicitContentCover: result.value(forKey: "explicitContentCover") as! Int,
                                                       preview: result.value(forKey: "preview") as! String,
                                                       md5Image: result.value(forKey: "md5Image") as! String,
+                                            
                                                       // for artist
                                                       artist: Artist(id: result.value(forKey: "artistID") as? Int ?? 0,
                                                                      name: result.value(forKey: "artistName") as? String ?? "",
                                                                      tracklist: result.value(forKey: "artistTracklist") as? String ?? "",
                                                                      type: result.value(forKey: "artistType") as? String ?? "") ,
-                                                      type: result.value(forKey: "type") as! String))
+                                                      type: result.value(forKey: "type") as! String,
+                                                      imageUrl: result.value(forKey: "imageUrl") as? String))
                 }
                 completion(.success(AnArray))
             } catch  {

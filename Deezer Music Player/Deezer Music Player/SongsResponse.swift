@@ -21,7 +21,8 @@ struct SongsResponse: Codable {
 struct SongsResponseDatum: Codable {
     let id: Int
     let readable: Bool
-    let title, titleShort, titleVersion, isrc: String
+    let title: String
+    let titleShort, titleVersion, isrc: String?
     let link: String
     let duration, trackPosition, diskNumber, rank: Int
     let explicitLyrics: Bool
@@ -30,6 +31,7 @@ struct SongsResponseDatum: Codable {
     let md5Image: String
     let artist: Artist
     let type: String
+    var imageUrl: String?
 
     enum CodingKeys: String, CodingKey {
         case id, readable, title
@@ -45,6 +47,7 @@ struct SongsResponseDatum: Codable {
         case preview
         case md5Image = "md5_image"
         case artist, type
+        
     }
 }
 

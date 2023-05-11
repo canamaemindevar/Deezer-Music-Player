@@ -35,6 +35,8 @@
 		A9C95D092A0B8AFF00BDDABD /* SongCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D082A0B8AFF00BDDABD /* SongCell.swift */; };
 		A9C95D1F2A0BF69300BDDABD /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D1E2A0BF69300BDDABD /* CoreDataManager.swift */; };
 		A9C95D252A0BF8DB00BDDABD /* SongData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D232A0BF8DB00BDDABD /* SongData.xcdatamodeld */; };
+		A9C95D272A0D121900BDDABD /* FavoriSongsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D262A0D121900BDDABD /* FavoriSongsView.swift */; };
+		A9C95D292A0D127F00BDDABD /* FavoriSongsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C95D282A0D127F00BDDABD /* FavoriSongsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		A9C95D082A0B8AFF00BDDABD /* SongCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCell.swift; sourceTree = "<group>"; };
 		A9C95D1E2A0BF69300BDDABD /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		A9C95D242A0BF8DB00BDDABD /* SongData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongData.xcdatamodel; sourceTree = "<group>"; };
+		A9C95D262A0D121900BDDABD /* FavoriSongsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriSongsView.swift; sourceTree = "<group>"; };
+		A9C95D282A0D127F00BDDABD /* FavoriSongsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriSongsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 				A9BC81492A0A673C00260237 /* GenreArtistsView.swift */,
 				A9BC814F2A0A768500260237 /* ArtistView.swift */,
 				A9BC81572A0AA57700260237 /* SongsView.swift */,
+				A9C95D262A0D121900BDDABD /* FavoriSongsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				A9BC814B2A0A67AF00260237 /* GenreArtistsViewModel.swift */,
 				A9BC81512A0A784F00260237 /* ArtistViewModel.swift */,
 				A9BC81592A0AA60D00260237 /* SongsViewModel.swift */,
+				A9C95D282A0D127F00BDDABD /* FavoriSongsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A9BC81482A0A5EB700260237 /* GenreViewModel.swift in Sources */,
+				A9C95D272A0D121900BDDABD /* FavoriSongsView.swift in Sources */,
 				A9BC812E2A0A54B100260237 /* NetworkManager.swift in Sources */,
 				A9BC81502A0A768500260237 /* ArtistView.swift in Sources */,
 				A9BC81582A0AA57700260237 /* SongsView.swift in Sources */,
@@ -294,6 +301,7 @@
 				A9BC81432A0A5B8800260237 /* GenreCollectionViewCell.swift in Sources */,
 				A9BC813E2A0A58BF00260237 /* GenreView.swift in Sources */,
 				A9BC814C2A0A67AF00260237 /* GenreArtistsViewModel.swift in Sources */,
+				A9C95D292A0D127F00BDDABD /* FavoriSongsViewModel.swift in Sources */,
 				A9BC81522A0A784F00260237 /* ArtistViewModel.swift in Sources */,
 				A9C95D252A0BF8DB00BDDABD /* SongData.xcdatamodeld in Sources */,
 				A9BC81362A0A55ED00260237 /* GenreResponse.swift in Sources */,

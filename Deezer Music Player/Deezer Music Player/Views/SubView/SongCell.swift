@@ -19,6 +19,7 @@ final class SongCell: UITableViewCell {
     var songDelegate: SongPlayAble?
     var songsResponseDatum: SongsResponseDatum?
     var isFavedSong = false
+    var albumImageUrl: String?
     
     private let myView: UIView = {
         let iv = UIView()
@@ -144,11 +145,12 @@ extension SongCell {
     
     func config(datum:SongsResponseDatum, albumImageUrl: String, isFavedSong: Bool) {
         self.songsResponseDatum = datum
-        albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
+        albumimageView.sd_setImage(with: URL(string: "") )
         nameLabel.text = datum.title
         timeLabel.text = datum.link
         changeFavButtonImage(bool: isFavedSong)
-        
+        albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
+        self.albumImageUrl = albumImageUrl
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: songDelegate?.playerItem)
         NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: songDelegate?.playerItem)
     }
@@ -180,7 +182,25 @@ extension SongCell {
         }
         if isFavedSong == false {
           
-            CoreDataManager.shared.saveCoreData(withModel: data)
+            CoreDataManager.shared.saveCoreData(withModel: SongsResponseDatum(id: data.id,
+                                                                              readable: data.readable,
+                                                                              title: data.title,
+                                                                              titleShort: data.titleShort,
+                                                                              titleVersion: data.titleVersion,
+                                                                              isrc: data.isrc,
+                                                                              link: data.link,
+                                                                              duration: data.duration,
+                                                                              trackPosition: data.trackPosition,
+                                                                              diskNumber: data.diskNumber,
+                                                                              rank: data.rank,
+                                                                              explicitLyrics: data.explicitLyrics,
+                                                                              explicitContentLyrics: data.explicitContentLyrics,
+                                                                              explicitContentCover: data.explicitContentCover,
+                                                                              preview: data.preview,
+                                                                              md5Image: data.md5Image,
+                                                                              artist: data.artist,
+                                                                              type: data.type,
+                                                                              imageUrl: albumImageUrl))
             changeFavButtonImage(bool: true)
         } else {
             CoreDataManager.shared.deleteCoreData(with: data.id)

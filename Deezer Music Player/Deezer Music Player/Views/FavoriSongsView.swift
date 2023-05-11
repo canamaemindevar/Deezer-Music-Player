@@ -1,32 +1,24 @@
 //
-//  SongView.swift
+//  FavoriSongsView.swift
 //  Deezer Music Player
 //
-//  Created by Emincan Antalyalı on 9.05.2023.
+//  Created by Emincan Antalyalı on 11.05.2023.
 //
-
 import UIKit
 import AVKit
 
-protocol SongsViewInterface {
+protocol FavoriSongsViewInterface {
     func prepare()
 }
 
-protocol SongPlayAble {
-    func playOrStop()
-    func setMusic(songUrl: String)
-    var auidioPlayer: AVPlayer { get set }
-    var playerItem:AVPlayerItem? { get set }
-}
+class FavoriSongsView: UIViewController {
 
-class SongsView: UIViewController {
-
-     var auidioPlayer = AVPlayer()
-    weak var playerItem:AVPlayerItem?
+    var auidioPlayer = AVPlayer()
+    var playerItem:AVPlayerItem?
     var url = URL(string: "")
-    lazy var viewModel = SongsViewModel()
+     lazy var viewModel = FavoriSongsViewModel()
     
-    private let tableView: UITableView = {
+     let tableView: UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.backgroundColor = .systemBackground
@@ -44,14 +36,15 @@ class SongsView: UIViewController {
      
   
     }
-    deinit {
-        print("SongView Deinited")
+    override func viewDidAppear(_ animated: Bool) {
+        viewModel.viewDidAppear()
+        super.viewDidAppear(animated)
     }
     
 
 }
 
-extension SongsView: SongsViewInterface {
+extension FavoriSongsView: FavoriSongsViewInterface {
     func prepare() {
         view.addSubview(tableView)
         self.tableView.frame = view.bounds
@@ -64,7 +57,7 @@ extension SongsView: SongsViewInterface {
     
 }
 
-extension SongsView: SongPlayAble {
+extension FavoriSongsView: SongPlayAble {
     func playOrStop() {
         if auidioPlayer.rate == 0 {
             auidioPlayer.play()
@@ -85,25 +78,19 @@ extension SongsView: SongPlayAble {
     
 }
 
-extension SongsView: UITableViewDelegate,UITableViewDataSource {
+extension FavoriSongsView: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.arr?.data?.count ?? 2
+        viewModel.favArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCell.identifier, for: indexPath) as? SongCell else {
             return UITableViewCell()
         }
-        guard let data = viewModel.arr?.data?[indexPath.row] else {
-            return UITableViewCell()
-        }
-        cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: false)
-        viewModel.favIdArr.forEach { id in
-            if id == data.id {
-                cell.config(datum: data, albumImageUrl: viewModel.albumPicUrl ?? "", isFavedSong: true)
-        }
 
-         }
+        let data = viewModel.favArr[indexPath.row]
+        cell.config(datum: data, albumImageUrl: data.imageUrl ?? "", isFavedSong: true)
+       
          
         cell.songDelegate = self
         
@@ -118,4 +105,3 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
     
     
 }
-

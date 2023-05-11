@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SongsViewModelInterface {
+protocol SongsViewModelInterface: AnyObject {
     var view: SongsView? {get set}
     func viewDidLoad()
 }
@@ -30,11 +30,11 @@ class SongsViewModel: SongsViewModelInterface {
     }
     
     private func fetchFavsFromCoreData() {
-        CoreDataManager.shared.getDataForFavs { response in
+        CoreDataManager.shared.getDataForFavs { [weak self] response in
             switch response {
             case .success(let success):
                 success.forEach { element in
-                    self.favIdArr.append(element.id )
+                    self?.favIdArr.append(element.id )
                 }
             case .failure(let failure):
                 print("Error with fetching core data favs: \(failure)" )

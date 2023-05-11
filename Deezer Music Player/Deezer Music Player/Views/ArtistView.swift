@@ -78,7 +78,7 @@ extension ArtistView: UITableViewDelegate, UITableViewDataSource {
         guard  let id = viewModel.arr?.data?[indexPath.row].id else {
             return
         }
-        viewModel.segueToAlbum(id: String(id), picUrl: viewModel.arr?.data?.first?.coverMedium ?? "")
+        viewModel.segueToAlbum(id: String(id), picUrl: viewModel.arr?.data?[indexPath.row].coverMedium ?? "")
     }
     
     

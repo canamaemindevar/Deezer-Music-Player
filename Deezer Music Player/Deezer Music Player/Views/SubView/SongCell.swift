@@ -15,11 +15,13 @@ final class SongCell: UITableViewCell {
     
     static let identifier = "SongCell"
     
-    //MARK: - Components
+   
     var songDelegate: SongPlayAble?
     var songsResponseDatum: SongsResponseDatum?
     var isFavedSong = false
     var albumImageUrl: String?
+    
+    //MARK: - Components
     
     private let myView: UIView = {
         let iv = UIView()
@@ -47,6 +49,7 @@ final class SongCell: UITableViewCell {
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
         sView.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
+        sView.tintColor = .red
         return sView
     }()
     
@@ -60,11 +63,13 @@ final class SongCell: UITableViewCell {
         sView.numberOfLines = 0
         return sView
     }()
-    private let playStopButton: UIButton = {
+    public let playStopButton: UIButton = {
         let sView = UIButton()
         sView.translatesAutoresizingMaskIntoConstraints = false
         sView.layer.cornerRadius = 5
+        sView.tintColor = .label
         sView.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        sView.isEnabled = false
         return sView
     }()
     private let timeLabel: UILabel = {
@@ -90,17 +95,15 @@ final class SongCell: UITableViewCell {
         
         setupConts()
         saveButton.addTarget(self, action: #selector(saveToCoreData), for: .touchUpInside)
-        playStopButton.addTarget(self, action: #selector(playOrStop), for: .touchUpInside)
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Conts
     private func setupConts() {
-        
+        let size = 50.0
         backgroundColor = .clear
         contentView.addSubview(myView)
         contentView.addSubview(albumimageView)
@@ -122,7 +125,7 @@ final class SongCell: UITableViewCell {
             myView.bottomAnchor.constraint(equalToSystemSpacingBelow: albumimageView.bottomAnchor, multiplier: 0.5),
             albumimageView.widthAnchor.constraint(equalTo: myView.heightAnchor)
         ])
-        let size = 50.0
+        
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: myView.topAnchor),
             saveButton.trailingAnchor.constraint(equalTo: myView.trailingAnchor),
@@ -136,11 +139,9 @@ final class SongCell: UITableViewCell {
             stackview.bottomAnchor.constraint(equalToSystemSpacingBelow: myView.bottomAnchor, multiplier: 0)
         ])
     }
-    
-    
 
 }
-//MARK: - Ui Funcs
+//MARK: - Config Func
 extension SongCell {
     
     func config(datum:SongsResponseDatum, albumImageUrl: String, isFavedSong: Bool) {
@@ -152,18 +153,28 @@ extension SongCell {
         albumimageView.sd_setImage(with: URL(string: albumImageUrl) )
         self.albumImageUrl = albumImageUrl
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: songDelegate?.playerItem)
-        NotificationCenter.default.addObserver(self, selector: #selector(musicChanged), name: NSNotification.Name.AVPlayerItemFailedToPlayToEndTime, object: songDelegate?.playerItem)
+    }
+}
+
+//MARK: - Auido Funcs
+extension SongCell {
+    func changeButonImageToPlay() {
+        playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        songDelegate?.playOrStop()
     }
     
-    @objc private func playOrStop() {
-
+    func changeButonImageStop() {
+        playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+        songDelegate?.setMusic(songUrl: self.songsResponseDatum?.preview ?? "")
+    }
+    
+    @objc  func playOrStop() {
+        
         if playStopButton.currentImage == UIImage(systemName: "stop.fill") {
             changeButonImageToPlay()
         } else {
             changeButonImageStop()
         }
-
-
     }
     
     @objc private func playerDidFinishPlaying(sender: Notification) {
@@ -175,13 +186,32 @@ extension SongCell {
         songDelegate?.auidioPlayer.replaceCurrentItem(with: nil)
         songDelegate?.auidioPlayer.pause()
     }
+    
 
+    
+    func changeFavButtonImage(bool: Bool) {
+        if bool == true {
+            isFavedSong = bool
+            saveButton.setImage(UIImage(systemName: "heart.slash.fill"), for: .normal)
+        } else {
+            isFavedSong = bool
+            saveButton.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
+        }
+    }
+
+
+}
+
+//MARK: - Core Data
+
+extension SongCell {
+    
     @objc private func  saveToCoreData() {
         guard let data = songsResponseDatum else {
             return
         }
         if isFavedSong == false {
-          
+            
             CoreDataManager.shared.saveCoreData(withModel: SongsResponseDatum(id: data.id,
                                                                               readable: data.readable,
                                                                               title: data.title,
@@ -204,36 +234,11 @@ extension SongCell {
             changeFavButtonImage(bool: true)
         } else {
             CoreDataManager.shared.deleteCoreData(with: data.id)
-           changeFavButtonImage(bool: false)
-           
-        }
-    }
-    
-    private func changeFavButtonImage(bool: Bool) {
-        if bool == true {
-            isFavedSong = bool
-            saveButton.setImage(UIImage(systemName: "heart.slash.fill"), for: .normal)
-        } else {
-            isFavedSong = bool
-            saveButton.setImage(UIImage(systemName: "bolt.heart"), for: .normal)
+            changeFavButtonImage(bool: false)
+            
         }
     }
 }
 
-//MARK: - Auido Funcs
-extension SongCell {
-    func changeButonImageToPlay() {
-        playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        songDelegate?.playOrStop()
-    }
-    
-    func changeButonImageStop() {
-        playStopButton.setImage(UIImage(systemName: "stop.fill"), for: .normal)
-        songDelegate?.setMusic(songUrl: self.songsResponseDatum?.preview ?? "")
-    }
-    
-   
-    
-    
-}
+
 

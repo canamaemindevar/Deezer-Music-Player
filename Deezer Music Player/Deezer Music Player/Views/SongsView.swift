@@ -5,7 +5,7 @@
 //  Created by Emincan Antalyalı on 9.05.2023.
 //
 
-import UIKit
+import UIKit.UITableView
 import AVKit
 
 protocol SongsViewInterface {
@@ -21,10 +21,12 @@ protocol SongPlayAble {
 
 class SongsView: UIViewController {
 
-     var auidioPlayer = AVPlayer()
-    weak var playerItem:AVPlayerItem?
+    var auidioPlayer = AVPlayer()
+    var playerItem:AVPlayerItem?
     var url = URL(string: "")
     lazy var viewModel = SongsViewModel()
+    
+    //MARK: - Components
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
@@ -36,6 +38,7 @@ class SongsView: UIViewController {
         
         return tableView
     }()
+    //MARK: - life cycle
     override func viewDidLoad() {
         
         viewModel.view = self
@@ -44,13 +47,10 @@ class SongsView: UIViewController {
      
   
     }
-    deinit {
-        print("SongView Deinited")
-    }
-    
 
 }
 
+//MARK: - SongsViewInterface
 extension SongsView: SongsViewInterface {
     func prepare() {
         view.addSubview(tableView)
@@ -63,7 +63,7 @@ extension SongsView: SongsViewInterface {
     
     
 }
-
+//MARK: - SongPlayAble
 extension SongsView: SongPlayAble {
     func playOrStop() {
         if auidioPlayer.rate == 0 {
@@ -84,6 +84,8 @@ extension SongsView: SongPlayAble {
 
     
 }
+
+//MARK: - TableView funcs
 
 extension SongsView: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -114,6 +116,23 @@ extension SongsView: UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    
+        guard let cell = tableView.cellForRow(at: indexPath) as? SongCell else {
+            return
+        }
+        cell.playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SongCell else {
+            return
+        }
+        cell.playOrStop()
+
     }
     
     

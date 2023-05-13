@@ -4,7 +4,7 @@
 //
 //  Created by Emincan Antalyalı on 11.05.2023.
 //
-import UIKit
+import UIKit.UITableView
 import AVKit
 
 protocol FavoriSongsViewInterface {
@@ -16,7 +16,9 @@ class FavoriSongsView: UIViewController {
     var auidioPlayer = AVPlayer()
     var playerItem:AVPlayerItem?
     var url = URL(string: "")
-     lazy var viewModel = FavoriSongsViewModel()
+    lazy var viewModel = FavoriSongsViewModel()
+    
+    //MARK: - Components
     
      let tableView: UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
@@ -28,6 +30,9 @@ class FavoriSongsView: UIViewController {
         
         return tableView
     }()
+    
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         
         viewModel.view = self
@@ -44,6 +49,8 @@ class FavoriSongsView: UIViewController {
 
 }
 
+//MARK: - FavoriSongsViewInterface
+
 extension FavoriSongsView: FavoriSongsViewInterface {
     func prepare() {
         view.addSubview(tableView)
@@ -56,6 +63,8 @@ extension FavoriSongsView: FavoriSongsViewInterface {
     
     
 }
+
+//MARK: - SongPlayAble
 
 extension FavoriSongsView: SongPlayAble {
     func playOrStop() {
@@ -72,11 +81,14 @@ extension FavoriSongsView: SongPlayAble {
         playerItem = AVPlayerItem(url: url!)
         auidioPlayer = AVPlayer(playerItem: playerItem)
         playOrStop()
+        
     }
     
 
     
 }
+
+//MARK: - TableView funcs
 
 extension FavoriSongsView: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,15 +105,30 @@ extension FavoriSongsView: UITableViewDelegate,UITableViewDataSource {
        
          
         cell.songDelegate = self
-        
-        
-        
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 160
     }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    
+        guard let cell = tableView.cellForRow(at: indexPath) as? SongCell else {
+            return
+        }
+        cell.playStopButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? SongCell else {
+            return
+        }
+        cell.playOrStop()
+
+    }
+    
     
     
 }

@@ -24,7 +24,8 @@ class TableHeaderView: UIView {
         NSLayoutConstraint.activate([
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: frame.height)
+            imageView.heightAnchor.constraint(equalToConstant: frame.height),
+            imageView.widthAnchor.constraint(equalToConstant: frame.height)
         ])
         
     }

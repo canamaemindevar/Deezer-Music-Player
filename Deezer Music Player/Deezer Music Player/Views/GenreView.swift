@@ -5,16 +5,18 @@
 //  Created by Emincan Antalyalı on 9.05.2023.
 //
 
-import UIKit
+import UIKit.UICollectionView
 
 protocol GenreViewInterface: AnyObject {
     func prepare()
 }
 
-class GenreView: UIViewController {
+final class GenreView: UIViewController {
    
     
     private lazy var viewModel = GenreViewModel()
+    
+    //MARK: - Components
     
     let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -32,6 +34,8 @@ class GenreView: UIViewController {
         return collection
     }()
     
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         viewModel.view = self
         viewModel.viewDidLoad()
@@ -41,6 +45,8 @@ class GenreView: UIViewController {
 
 
 }
+
+//MARK: - GenreViewInterface
 
 extension GenreView: GenreViewInterface {
     func prepare() {
@@ -60,6 +66,8 @@ extension GenreView: GenreViewInterface {
     
     
 }
+
+//MARK: - ColletionView Funcs
 
 extension GenreView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

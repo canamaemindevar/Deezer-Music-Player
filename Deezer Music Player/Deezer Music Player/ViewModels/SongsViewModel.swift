@@ -31,10 +31,13 @@ class SongsViewModel: SongsViewModelInterface {
     
     private func fetchFavsFromCoreData() {
         CoreDataManager.shared.getDataForFavs { [weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let success):
                 success.forEach { element in
-                    self?.favIdArr.append(element.id )
+                    self.favIdArr.append(element.id )
                 }
             case .failure(let failure):
                 print("Error with fetching core data favs: \(failure)" )

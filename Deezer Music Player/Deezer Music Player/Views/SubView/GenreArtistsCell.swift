@@ -43,6 +43,7 @@ class GenreArtistsCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(nameLabel)
         
+        
         NSLayoutConstraint.activate([
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.heightAnchor.constraint(equalToConstant: contentView.frame.height / 3),

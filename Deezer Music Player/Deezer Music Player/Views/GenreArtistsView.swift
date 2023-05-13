@@ -5,7 +5,7 @@
 //  Created by Emincan Antalyalı on 9.05.2023.
 //
 
-import UIKit
+import UIKit.UICollectionView
 
 protocol GenreArtistsInterface {
     func prepare()
@@ -16,6 +16,8 @@ class GenreArtistsView: UIViewController {
     
     
     lazy var viewModel = GenreArtistsViewModel()
+    
+    //MARK: - Components
     
     let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,6 +35,7 @@ class GenreArtistsView: UIViewController {
         return collection
     }()
     
+    //MARK: - Life Cycle
     
     override func viewDidLoad() {
         viewModel.view = self
@@ -42,6 +45,7 @@ class GenreArtistsView: UIViewController {
 
 }
 
+//MARK: - GenreArtistsInterface
 
 extension GenreArtistsView: GenreArtistsInterface {
     func prepare() {
@@ -60,6 +64,8 @@ extension GenreArtistsView: GenreArtistsInterface {
     
     
 }
+
+//MARK: - ColletionView Funcs
 
 extension GenreArtistsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

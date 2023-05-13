@@ -17,13 +17,9 @@ class FavoriSongsViewModel: FavoriSongsViewModelInterface {
 
    
    var favArr: [SongsResponseDatum] = []
-   var albumPicUrl: String?
     
    weak var view: FavoriSongsView?
     
-//    init() {
-//        fetchFavsFromCoreData()
-//    }
 
     
     func viewDidLoad() {
@@ -34,14 +30,16 @@ class FavoriSongsViewModel: FavoriSongsViewModelInterface {
     }
     
     private func fetchFavsFromCoreData() {
-        CoreDataManager.shared.getDataForFavs { response in
+        CoreDataManager.shared.getDataForFavs { [weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let success):
                 self.favArr = []
                 success.forEach { element in
-                    print(element)
+                    
                     self.favArr.append(element)
-                  
                 }
                 DispatchQueue.main.async {
                     self.view?.tableView.reloadData()

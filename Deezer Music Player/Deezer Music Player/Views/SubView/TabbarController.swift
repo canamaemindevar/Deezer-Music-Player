@@ -5,7 +5,7 @@
 //  Created by Emincan Antalyalı on 9.05.2023.
 //
 
-import UIKit
+import UIKit.UITabBar
 
 class TabbarViewController: UITabBarController {
 

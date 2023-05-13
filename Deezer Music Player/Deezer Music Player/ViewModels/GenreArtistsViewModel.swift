@@ -24,7 +24,10 @@ class GenreArtistsViewModel: GenreArtistsViewModelInterface {
     }
     
     func segueToArtist(id: String) {
-        NetworkManager.shared.fetchArtistAlbum(artistId: id) { response in
+        NetworkManager.shared.fetchArtistAlbum(artistId: id) {[weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let success):
                 DispatchQueue.main.async {

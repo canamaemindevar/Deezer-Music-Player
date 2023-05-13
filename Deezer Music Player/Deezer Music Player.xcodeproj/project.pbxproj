@@ -181,8 +181,8 @@
 		A9C95D1B2A0BED8E00BDDABD /* SubView */ = {
 			isa = PBXGroup;
 			children = (
-				A9BC81422A0A5B8800260237 /* GenreCollectionViewCell.swift */,
 				A9BC813F2A0A59E400260237 /* TabbarController.swift */,
+				A9BC81422A0A5B8800260237 /* GenreCollectionViewCell.swift */,
 				A9BC814D2A0A6C6100260237 /* GenreArtistsCell.swift */,
 				A9BC81532A0A937900260237 /* TableHeaderView.swift */,
 				A9BC81552A0A983700260237 /* AlbumCell.swift */,

@@ -6,7 +6,7 @@
 //
 
 
-import UIKit
+import UIKit.UITableView
 
 protocol ArtistViewInterface {
     func prepare()
@@ -16,6 +16,8 @@ class ArtistView: UIViewController {
     
     
     lazy var viewModel = ArtistViewModel()
+    
+    //MARK: - Components
     
     private let tableView: UITableView = {
         let tableView = UITableView(frame: .zero,style: .grouped)
@@ -28,6 +30,8 @@ class ArtistView: UIViewController {
         return tableView
     }()
     
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         viewModel.view = self
         viewModel.viewDidLoad()
@@ -36,6 +40,8 @@ class ArtistView: UIViewController {
     }
 
 }
+
+//MARK: - ArtistViewInterface
 
 extension ArtistView: ArtistViewInterface {
     func prepare() {
@@ -56,6 +62,8 @@ extension ArtistView: ArtistViewInterface {
     
     
 }
+
+//MARK: - TableView funcs
 
 extension ArtistView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

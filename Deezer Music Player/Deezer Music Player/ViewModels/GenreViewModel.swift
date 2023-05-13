@@ -27,7 +27,10 @@ class GenreViewModel: GenreViewModelInterface {
     }
     
     func startQuery() {
-        NetworkManager.shared.fetchGenre { response in
+        NetworkManager.shared.fetchGenre {[weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let success):
                 DispatchQueue.main.async {
@@ -42,7 +45,10 @@ class GenreViewModel: GenreViewModelInterface {
     }
     
     func segueToArtistOfGenre(id: String) {
-        NetworkManager.shared.fetchGenreArtist( catagoryID: id) { response in
+        NetworkManager.shared.fetchGenreArtist( catagoryID: id) {[weak self] response in
+            guard let self = self else {
+                return
+            }
             switch response {
             case .success(let success):
                 DispatchQueue.main.async {
